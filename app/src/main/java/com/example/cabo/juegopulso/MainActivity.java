@@ -1,5 +1,7 @@
 package com.example.cabo.juegopulso;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,11 +32,11 @@ public class MainActivity extends AppCompatActivity {
         cinta = (TextView) findViewById(R.id.txtcinta);
         numal = (TextView) findViewById(R.id.txtnumaleatorio);
         btnpul = (Button) findViewById(R.id.btnpulsar);
-        random3 = (Math.random() * 2.6) + 1;
+        random3 = (Math.random() * 2.3) + 1;
 
         numal.setText(df.format(random3));
         handler.postDelayed(runnable, 100);
-        //inicia();
+
 
         btnpul.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
                 pulsar();
             }
         });
-
-
 
     }
 
@@ -55,37 +55,15 @@ public class MainActivity extends AppCompatActivity {
             random = 1;
         }
         random = random+.1;
-
     }
 
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-      /* do what you need to do */
             setea();
-      /* and here comes the "trick" */
             handler.postDelayed(this, 100);
         }
     };
-
-    /*private final int interval = 3000; // 1 Second
-    private Handler handler = new Handler();
-    private Runnable runnable = new Runnable(){
-        public void run() {
-            Toast.makeText(MainActivity.this, "C'Mom no hands!", Toast.LENGTH_SHORT).show();
-        }
-    };
-
-    public void inicia(){
-        while(true) {
-            handler.postAtTime(runnable, 2000);
-            handler.postDelayed(runnable, interval);
-            if(pulsar()==true){
-                break;
-            }
-        }
-    }*/
-
 
 
     public void pulsar(){
@@ -94,10 +72,21 @@ public class MainActivity extends AppCompatActivity {
 
         if(temporal == tempora2){
             Toast.makeText(MainActivity.this,"Buen Pulso!", Toast.LENGTH_LONG).show();
-
+            reiniciarActivity(this);
+        }else{
+            Toast.makeText(MainActivity.this,"Te falto Pulso!", Toast.LENGTH_LONG).show();
+            reiniciarActivity(this);
         }
 
 
 
     }
+
+    public static void reiniciarActivity(Activity actividad){
+        Intent intent=new Intent();
+        intent.setClass(actividad, actividad.getClass());
+        actividad.startActivity(intent);
+        actividad.finish();
+    }
+
 }
