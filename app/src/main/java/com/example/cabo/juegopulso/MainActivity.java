@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public double random = 1;
     public double random3;
     public Handler handler = new Handler();
-    DecimalFormat df = new DecimalFormat("#.0");
+    DecimalFormat decFor = new DecimalFormat("#.0");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         btnpul = (Button) findViewById(R.id.btnpulsar);
         random3 = (Math.random() * 2.3) + 1;
 
-        numal.setText(df.format(random3));
-        handler.postDelayed(runnable, 100);
+        numal.setText(decFor.format(random3));
+        handler.postDelayed(runnable, 200);
 
 
         btnpul.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             setea();
-            handler.postDelayed(this, 100);
+            handler.postDelayed(this, 200);
         }
     };
 
@@ -69,13 +69,14 @@ public class MainActivity extends AppCompatActivity {
     public void pulsar(){
         double temporal = Double.parseDouble(cinta.getText().toString());
         double tempora2 = Double.parseDouble(numal.getText().toString());
+        double t = (Math.random() * 2.3) + 1;
 
         if(temporal == tempora2){
             Toast.makeText(MainActivity.this,"Buen Pulso!", Toast.LENGTH_LONG).show();
-            reiniciarActivity(this);
+            numal.setText(decFor.format(t));
         }else{
             Toast.makeText(MainActivity.this,"Te falto Pulso!", Toast.LENGTH_LONG).show();
-            reiniciarActivity(this);
+            numal.setText(decFor.format(t));
         }
 
 
